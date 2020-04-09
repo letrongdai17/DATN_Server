@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['guard' => 'admin'], function () {
-    Route::post('/login', 'API\AuthController@login');
-    Route::post('/register', 'API\AuthController@register');
+    Route::post('/login', 'API\auth\LoginController@login');
+    Route::post('/register', 'API\auth\RegisterController@register');
 });
 
 Route::group([
@@ -23,5 +23,4 @@ Route::group([
 ], function() {
     Route::get('/me', 'API\AuthController@me');
     Route::get('/classes', 'API\ClassesController@index');
-    Route::get('/classes/{id}', 'API\ClassesController@getClassById');
 });

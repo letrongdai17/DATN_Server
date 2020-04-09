@@ -24,22 +24,4 @@ class ClassesController extends Controller
 
         return response()->json(['data'=>$classes], 200);
     }
-
-    public function getClassById(Request $request)
-    {
-        $classId = $request->id;
-        Log::info('Class id: '.$classId);
-
-        if (!$classId) {
-            return response()->json(['error'=>'Bad request'], 401);
-        }
-
-        $classDetails = $this->classService->getClassDetailByClassId($classId);
-        return response()->json(['data'=>$classDetails], 200);
-    }
-
-    public function createClassDetail(Request $request)
-    {
-        
-    }
 }
