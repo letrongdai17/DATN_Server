@@ -4,7 +4,7 @@
 namespace App\Services;
 
 
-use App\Models\Classes;
+use App\Models\_Class;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +13,7 @@ class ClassesService
     protected $_class;
     protected $user;
 
-    public function __construct(Classes $_class, User $user)
+    public function __construct(_Class $_class, User $user)
     {
         $this->_class = $_class;
         $this->user = $user;
@@ -26,10 +26,13 @@ class ClassesService
         return $user->classes;
     }
 
-    public function getClassDetailByClassId($classId)
+    public function createClass($data)
     {
-        $classDetail = $this->_class->find($classId);
+        $newClass = new _Class();
+        $newClass->subject_name = $data['subject_name'];
+        $newClass->subject_code = $data['subject_code'];
+        $newClass->class_code   = $data['class_code'];
 
-        return $classDetail->detailClasses;
+        $newClass->save();
     }
 }
