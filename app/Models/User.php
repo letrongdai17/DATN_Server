@@ -14,6 +14,6 @@ class User extends Authenticatable
 
     public function classes()
     {
-        return $this->belongsToMany('App\Models\Classes', 'user_class');
+        return $this->belongsToMany('App\Models\_Class', 'user_class', 'user_id', 'class_id');
     }
 }

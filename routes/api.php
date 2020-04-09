@@ -21,6 +21,7 @@ Route::group(['guard' => 'admin'], function () {
 Route::group([
     'middleware' => 'auth:api'
 ], function() {
-    Route::get('/me', 'API\AuthController@me');
+    Route::get('/me', 'API\auth\MeController@me');
     Route::get('/classes', 'API\ClassesController@index');
+    Route::post('/class/create', 'API\ClassesController@createClass');
 });
