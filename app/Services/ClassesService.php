@@ -35,4 +35,9 @@ class ClassesService
 
         $newClass->save();
     }
+
+    public function getById($id)
+    {
+        return $this->_class->findOrFail($id);
+    }
 }
