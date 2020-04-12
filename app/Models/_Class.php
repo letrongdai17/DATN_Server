@@ -11,7 +11,7 @@ class _Class extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\Models\User', 'user_class', 'user_id', 'class_id');
+        return $this->belongsToMany('App\Models\User', 'user_class', 'class_id', 'user_id');
     }
 
     public function lessons()
