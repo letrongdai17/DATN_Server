@@ -24,5 +24,7 @@ Route::group([
     Route::get('/me', 'API\auth\MeController@me');
     Route::get('classes/{classId}/lessons', 'API\LessonController@index');
     Route::post('/class/create', 'API\ClassesController@createClass');
+    Route::post('/lesson/create', 'API\LessonController@createLesson');
+    Route::post('/lesson/update', 'API\LessonController@updateLesson');
     Route::get('/classes', 'API\ClassesController@index');
 });
