@@ -26,14 +26,15 @@ class ClassesService
         return $user->classes;
     }
 
-    public function createClass($data)
+    public function createClass($data, $userId)
     {
+        $user = $this->user->find($userId);
         $newClass = new _Class();
         $newClass->subject_name = $data['subject_name'];
         $newClass->subject_code = $data['subject_code'];
         $newClass->class_code   = $data['class_code'];
 
-        $newClass->save();
+        $user->classes()->save($newClass);
     }
 
     public function getById($id)

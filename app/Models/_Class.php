@@ -18,4 +18,9 @@ class _Class extends Model
     {
         return $this->hasMany('App\Models\Lesson');
     }
+
+    public function students()
+    {
+        return $this->hasMany('App\Models\Student');
+    }
 }
