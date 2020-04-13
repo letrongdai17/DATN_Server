@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddClassIdToStudentTable extends Migration
+class CreateClassStudentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddClassIdToStudentTable extends Migration
      */
     public function up()
     {
-        Schema::table('students', function (Blueprint $table) {
+        Schema::create('class_student', function (Blueprint $table) {
+            $table->id();
             $table->unsignedInteger('class_id');
+            $table->unsignedInteger('student_id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddClassIdToStudentTable extends Migration
      */
     public function down()
     {
-        Schema::table('students', function (Blueprint $table) {
-            $table->dropColumn('class_id');
-        });
+        Schema::dropIfExists('class_student');
     }
 }

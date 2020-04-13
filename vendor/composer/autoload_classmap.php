@@ -24,6 +24,7 @@ return array(
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Models\\ClasssStudent' => $baseDir . '/app/Models/ClasssStudent.php',
     'App\\Models\\Lesson' => $baseDir . '/app/Models/Lesson.php',
     'App\\Models\\LessonStudent' => $baseDir . '/app/Models/LessonStudent.php',
     'App\\Models\\Student' => $baseDir . '/app/Models/Student.php',

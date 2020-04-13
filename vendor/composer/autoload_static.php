@@ -583,6 +583,7 @@ class ComposerStaticInit6550a396fbfe9c9b3c1e01bd4be137d3
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\ClasssStudent' => __DIR__ . '/../..' . '/app/Models/ClasssStudent.php',
         'App\\Models\\Lesson' => __DIR__ . '/../..' . '/app/Models/Lesson.php',
         'App\\Models\\LessonStudent' => __DIR__ . '/../..' . '/app/Models/LessonStudent.php',
         'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
