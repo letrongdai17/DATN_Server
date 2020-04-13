@@ -17,6 +17,11 @@ class LessonService
         $this->lesson = $lesson;
     }
 
+    public function getById($id)
+    {
+        return $this->lesson->find($id);
+    }
+
     public function getLessonsByClassId($classId)
     {
         return $this->lesson->where('class_id', '=', $classId)->get();

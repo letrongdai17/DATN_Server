@@ -44,7 +44,7 @@ class ClassesController extends Controller
             return response()->json(['error'=>'Permission denied'], 403);
         }
 
-        $this->classService->createClass($request->all());
+        $this->classService->createClass($request->all(), $userId);
 
         return response()->json(['message'=>'Create class successfully'], 201);
     }

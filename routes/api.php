@@ -26,5 +26,6 @@ Route::group([
     Route::post('/class/create', 'API\ClassesController@createClass');
     Route::post('/lesson/create', 'API\LessonController@createLesson');
     Route::post('/lesson/update', 'API\LessonController@updateLesson');
+    Route::post('/student/rollUp', 'API\StudentController@rollUp');
     Route::get('/classes', 'API\ClassesController@index');
 });
