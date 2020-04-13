@@ -21,6 +21,6 @@ class _Class extends Model
 
     public function students()
     {
-        return $this->hasMany('App\Models\Student');
+        return $this->belongsToMany('App\Models\Student', 'class_student', 'student_id', 'class_id');
     }
 }
