@@ -5,7 +5,9 @@ namespace App\Services;
 
 
 use App\Models\_Class;
+use App\Models\Lesson;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ClassesService
@@ -19,11 +21,22 @@ class ClassesService
         $this->user = $user;
     }
 
-    public function getClassByUserId($userId)
+    public function getClassByUserId($params)
     {
-        $user = $this->user->find($userId);
+        $classesObject = DB::table('users')
+            ->leftjoin('user_class', 'users.id', '=', 'user_class.user_id')
+            ->leftjoin('classes', 'classes.id', '=', 'user_class.class_id')
+            ->where('users.id', '=', $params['id'])
+            ->paginate($params['per_page'], ['*'], 'current_page', $params['current_page']);
 
-        return $user->classes;
+        $classesData = json_decode(json_encode($classesObject, true), true);
+
+        return [
+            'data'          =>      $classesData['data'],
+            'total'         =>      $classesData['total'],
+            'per_page'      =>      $classesData['per_page'],
+            'current_page'  =>      $classesData['current_page'],
+        ];
     }
 
     public function createClass($data, $userId)

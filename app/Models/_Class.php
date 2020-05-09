@@ -16,7 +16,7 @@ class _Class extends Model
 
     public function lessons()
     {
-        return $this->hasMany('App\Models\Lesson');
+        return $this->hasMany('App\Models\Lesson', 'class_id', 'id');
     }
 
     public function students()

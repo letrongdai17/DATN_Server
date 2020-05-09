@@ -10,11 +10,12 @@ class Lesson extends Model
 
     public function students()
     {
-        return $this->belongsToMany('App\Models\Student', 'lesson_student');
+        return $this->belongsToMany('App\Models\Student', 'lesson_student')
+            ->withTimestamps();
     }
 
     public function class()
     {
-        return $this->belongsTo('App\Models\_Class');
+        return $this->belongsTo('App\Models\_Class', 'class_id');
     }
 }

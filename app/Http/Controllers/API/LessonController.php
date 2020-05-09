@@ -25,9 +25,10 @@ class LessonController extends Controller
     public function index(Request $request)
     {
         $_class = $this->classService->getById($request->classId);
+        $params = $this->getParams($request);
 
         if (!$_class) {
-            return response()->json(['error'=>'Class not found'], 404);
+            return response()->json(['error'=>'Không tìm thấy lớp'], 404);
         }
 
         $users = $_class->users->toArray();
@@ -35,9 +36,9 @@ class LessonController extends Controller
             return response()->json(['error'=>'Permission denied'], 403);
         }
 
-        $lessons = $this->lessonService->getLessonsByClassId($request->classId);
+        $data = $this->lessonService->getLessonsByClassId($params);
 
-        return response()->json(['data'=>$lessons], 200);
+        return response()->json($data, 200);
     }
 
     public function createLesson(Request $request)
@@ -53,21 +54,21 @@ class LessonController extends Controller
         $now = Carbon::now();
 
         if ($startTime->timestamp > $endTime->timestamp) {
-            return response()->json('The end time must be later than start time');
+            return response()->json('Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc');
         }
 
         if ($startTime->subMinutes(15)->timestamp > $now->timestamp
                 || $endTime->addMinutes(15)->timestamp < $now->timestamp) {
-            return response()->json(['error'=>'Out of range time'], 400);
+            return response()->json(['error'=>'Thời gian tạo lớp không phù hợp'], 400);
         }
 
         if ($this->lessonService->isDuplicateTimeForCreate($request->start_time, $request->class_id)) {
-            return response()->json(['error'=>'Duplicate time'], 400);
+            return response()->json(['error'=>'Thời gian tạo lớp bị trùng'], 400);
         }
 
         $this->lessonService->createLesson($request->all());
 
-        return response()->json(['message'=>'Create lesson successfully'], 201);
+        return response()->json(['message'=>'Tạo một tiết học thành công'], 201);
     }
 
     public function updateLesson(Request $request)
@@ -104,6 +105,17 @@ class LessonController extends Controller
         return response()->json(['Update lesson successfully'], 200);
     }
 
+    public function deleteLesson(Request $request)
+    {
+        $data = $this->lessonService->deleteLesson($request->lessonId);
+        return response()->json($data, 200);
+    }
+    public function confirmLesson(Request $request)
+    {
+        $data = $this->lessonService->confirmLesson($request->lessonId);
+        return response()->json($data, 200);
+    }
+
     protected function isBelongToCurrentUser($users)
     {
         $check = false;
@@ -136,6 +148,15 @@ class LessonController extends Controller
             "id"            =>      "required",
             "start_time"    =>      "required",
             "end_time"      =>      "required",
+        ];
+    }
+
+    protected function getParams($request)
+    {
+        return [
+            'classId'       =>      $request->classId,
+            'current_page'  =>      $request->current_page ? $request->current_page : 1,
+            'per_page'      =>      $request->per_page ? $request->per_page : 10,
         ];
     }
 }
